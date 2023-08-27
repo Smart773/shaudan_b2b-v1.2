@@ -11,7 +11,8 @@ class RetailerOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     final RetailerOrderController controller =
         Get.put(RetailerOrderController());
-        //
+    //
+    // Path: lib\features\retailer\order\view\retailer_order.dart
     final Size size = MediaQuery.of(context).size;
     const String title =
         'Order DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder Details';
