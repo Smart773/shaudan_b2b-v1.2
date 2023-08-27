@@ -11,6 +11,7 @@ class RetailerOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     final RetailerOrderController controller =
         Get.put(RetailerOrderController());
+        //
     final Size size = MediaQuery.of(context).size;
     const String title =
         'Order DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder DetailsOrder Details';
