@@ -65,6 +65,9 @@ class WholeSalerController extends GetxController {
         isloading.value = false;
         Utils.snackBar("Error", error.toString());
       });
+    }).onError((error, stackTrace) {
+      isloading.value = false;
+      Utils.snackBar("Error", error.toString());
     });
   }
 

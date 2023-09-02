@@ -5,8 +5,8 @@ import 'package:shaudan_b2b/features/retailer/order/data/models/order_model.dart
 import 'package:shaudan_b2b/features/retailer/order/view/widgets.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
 
-class RetailerOrder extends StatelessWidget {
-  const RetailerOrder({super.key});
+class WholeSalerOrder extends StatelessWidget {
+  const WholeSalerOrder({super.key});
 
   @override
   Widget build(BuildContext context) {

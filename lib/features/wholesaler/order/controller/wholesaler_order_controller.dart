@@ -4,7 +4,7 @@ import 'package:shaudan_b2b/features/retailer/order/data/models/order_model.dart
 import 'package:shaudan_b2b/features/retailer/order/data/repositories/order_repositories.dart';
 import 'package:shaudan_b2b/utils/utils.dart';
 
-class RetailerOrderController extends GetxController
+class WholeSalerOrderController extends GetxController
     with GetSingleTickerProviderStateMixin {
   // Rx list of orderModel
   Rx<List<OrderModel>> orderModelList = Rx<List<OrderModel>>([]);

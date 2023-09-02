@@ -45,6 +45,7 @@ class UserRepository {
         AppUrl.createUser, // url
       );
       UserModel userModel = UserModel.fromJson(response);
+
       return userModel;
     } //try ()
     catch (e) {

@@ -64,6 +64,9 @@ class RetailerController extends GetxController {
         Utils.snackBar("Error", error.toString());
         isloading.value = false;
       });
+    }).onError((error, stackTrace) {
+      Utils.snackBar("Error", error.toString());
+      isloading.value = false;
     });
   }
 

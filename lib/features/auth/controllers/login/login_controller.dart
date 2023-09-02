@@ -18,22 +18,14 @@ class LoginController extends GetxController {
   final isobscureText = true.obs;
   final isloading = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   @override
   void onReady() async {
     super.onReady();
-    // _checkLogin();
-    print("in On Ready");
     String? id = await LoginPref.getAccountId();
     if (id != null) {
-      print("in On Ready If Login");
       UserRepository().getUser(userId: id).then((value) {
         user.value = value;
-        print("user value ${user.value}");
         key.value.currentState!.reset();
         Get.snackbar("Success", "Login Success");
         if (user.value.role == "retailer") {
@@ -73,41 +65,24 @@ class LoginController extends GetxController {
         .loginAccount(email: email.value, password: password.value)
         .then((value) async {
       value.accountId;
-      print("account id ${value.accountId}");
       await userRepository.getUser(userId: value.accountId!).then((value) {
         user.value = value;
-        print("user value ${user.value}");
         key.value.currentState!.reset();
         Get.snackbar("Success", "Login Success");
-        if (user.value.role == "retailer")
+        if (user.value.role == "retailer") {
           Get.offAllNamed(RoutesName.retailerMain);
-        else
+        } else {
           Get.offAllNamed(RoutesName.wholesalerMain);
+        }
         isloading.value = false;
       }).onError((error, stackTrace) {
         isloading.value = false;
         Utils.snackBar("Error", error.toString());
       });
+    }).onError((error, stackTrace) {
+      isloading.value = false;
+      Utils.snackBar("Error", error.toString());
     });
-
-    // await userRepository
-    //     .loginAccount(
-    //   email: email.value,
-    //   password: password.value,
-    // )
-    //     .then((value) {
-    //   // user.value = value;
-    //   key.value.currentState!.reset();
-    //   Get.snackbar("Success", "Login Success");
-    //   if (user.value.role == "retailer")
-    //     Get.offAllNamed(RoutesName.retailerMain);
-    //   else
-    //     Get.offAllNamed(RoutesName.wholesalerMain);
-    //   isloading.value = false;
-    // }).onError((error, stackTrace) {
-    //   isloading.value = false;
-    //   Utils.snackBar("Error", error.toString());
-    // });
   }
 
   // validator
@@ -128,8 +103,4 @@ class LoginController extends GetxController {
   }
 
   // dispose
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

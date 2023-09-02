@@ -53,10 +53,6 @@ class RetailerRepository {
       });
 
       print("hereeee->>>>");
-      // AccountModel accountModel = AccountModel.fromJson(response);
-      // UserModel userModel = UserModel.fromJson(response);
-      // return accountModel;
-      // return userModel;
     } //try ()
     catch (e) {
       rethrow;
