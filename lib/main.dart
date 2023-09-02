@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shaudan_b2b/features/auth/controllers/login/login_controller.dart';
-import 'package:shaudan_b2b/features/retailer/order/view/retailer_order.dart';
-import 'package:shaudan_b2b/features/wholesaler/home/view/wholesaler_main/wholesaler_main.dart';
 import 'package:shaudan_b2b/res/localizations/languages.dart';
 import 'package:shaudan_b2b/res/routes/routes.dart';
 import 'cores/theme/app_theme.dart';

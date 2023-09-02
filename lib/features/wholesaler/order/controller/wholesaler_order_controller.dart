@@ -85,7 +85,7 @@ class WholeSalerOrderController extends GetxController
 
   Future<List<OrderModel>> getOrderList() async {
     orderModelList.value.clear();
-    final result = await OrderRepository().getOrderByUser();
+    final result = await OrderRepository().getOrderByWholesaler();
     orderModelList.value = result;
     print('${orderModelList.value.length}');
     return result;
@@ -102,7 +102,7 @@ class WholeSalerOrderController extends GetxController
     }
 
     final result =
-        await OrderRepository().getOrderByUserIdAndStatus(status: status);
+        await OrderRepository().getOrderByWholeSalerIdAndStatus(status: status);
 
     if (status == 'pending') {
       pendingOrderModelList.value = result;
@@ -143,6 +143,22 @@ class WholeSalerOrderController extends GetxController
   }
 
   void onCompleted(String orderId) async {
-    print('onCompleted');
+    Utils.showLoaing();
+    await updateOrderStatus(orderId, 'completed').then((value) async {
+      await getOrderByStatus('completed').then((value) {
+        if (selectedIndex.value == 0) {
+          onTabChange(0);
+        } else {
+          onTabChange(1);
+        }
+        Utils.hideLoading();
+      }).onError((error, stackTrace) {
+        Utils.hideLoading();
+        Get.snackbar('Error', error.toString());
+      });
+    }).onError((error, stackTrace) {
+      Utils.hideLoading();
+      Get.snackbar('Error', error.toString());
+    });
   }
 }

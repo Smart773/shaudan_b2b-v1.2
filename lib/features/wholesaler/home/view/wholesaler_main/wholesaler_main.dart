@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shaudan_b2b/features/retailer/account/view/account.dart';
-import 'package:shaudan_b2b/features/retailer/home/controller/retailer_main_controller/retailer_main_controller.dart';
-import 'package:shaudan_b2b/features/retailer/home/view/Home/rertailer_home.dart';
-import 'package:shaudan_b2b/features/retailer/notify/view/notify.dart';
+import 'package:shaudan_b2b/features/wholesaler/home/controller/wholesaler_main_controller/wholesaler_main_controller.dart';
 import 'package:shaudan_b2b/features/wholesaler/home/view/home/dashboard.dart';
+import 'package:shaudan_b2b/features/wholesaler/order/view/wholesaler_order.dart';
+import 'package:shaudan_b2b/features/wholesaler/store/view/store.dart';
 import 'package:shaudan_b2b/features/wholesaler/upload_product/view/upload_product.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
 import 'package:shaudan_b2b/res/localizations/app_Strings.dart';
@@ -16,21 +16,13 @@ class WholeSalerMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RetailerMainController wholeSalerMainController =
-        Get.put(RetailerMainController());
+    final WholeSalerMainController wholeSalerMainController =
+        Get.put(WholeSalerMainController());
     final List<Widget> pages = <Widget>[
       const WholesalerHome(),
-      const Notify(),
+      const Store(),
       const UploadProduct(),
-      const Center(
-        child: Text(
-          'Order',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      const WholeSalerOrder(),
       const Account(),
     ];
     return Scaffold(

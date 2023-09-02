@@ -16,4 +16,8 @@ class AppUrl {
   static const String createRetailer = "users/retailer";
   // get all products
   static const String getAllProducts = "products";
+  // get product by search
+  static const String getProductBySearch = "products/search";
+  // get all products by wholesaler
+  static const String getAllProductsByWholeSaler = "products/wholesaler";
 }

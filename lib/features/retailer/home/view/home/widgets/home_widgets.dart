@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:shaudan_b2b/features/retailer/home/data/models/product_model.dart';
+import 'package:shaudan_b2b/features/retailer/search/view/search.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
 import 'package:shaudan_b2b/res/localizations/app_Strings.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';

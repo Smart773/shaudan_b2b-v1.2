@@ -15,6 +15,7 @@ class OrderCard extends StatelessWidget {
     required this.status,
     required this.qty,
     required this.onPressed,
+    required this.onPressed2,
   });
 
   final String order;
@@ -26,6 +27,7 @@ class OrderCard extends StatelessWidget {
   final String status;
   final String qty;
   final Function() onPressed;
+  final Function() onPressed2;
 
   @override
   Widget build(BuildContext context) {
@@ -142,17 +144,28 @@ class OrderCard extends StatelessWidget {
                 ],
               ),
               status == 'pending'
-                  ? Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      OutlinedButton(
-                        onPressed: () {
-                          onPressed();
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Cancel Order'),
-                        ),
-                      ),
-                    ])
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                          OutlinedButton(
+                            onPressed: () {
+                              onPressed();
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Cancel Order'),
+                            ),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              onPressed2();
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Delivered'),
+                            ),
+                          ),
+                        ])
                   : const SizedBox(),
               const SizedBox(
                 height: 20,
@@ -177,6 +190,7 @@ class OrderWebCard extends StatelessWidget {
     required this.amount,
     required this.status,
     required this.onPressed,
+    required this.onPressed2,
   });
 
   final String order;
@@ -188,6 +202,7 @@ class OrderWebCard extends StatelessWidget {
   final String amount;
   final String status;
   final Function() onPressed;
+  final Function() onPressed2;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -253,17 +268,28 @@ class OrderWebCard extends StatelessWidget {
                 height: 10,
               ),
               status == 'pending'
-                  ? Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                      OutlinedButton(
-                        onPressed: () {
-                          onPressed();
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Cancel Order'),
-                        ),
-                      ),
-                    ])
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                          OutlinedButton(
+                            onPressed: () {
+                              onPressed();
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Cancel Order'),
+                            ),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              onPressed2();
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Delivered'),
+                            ),
+                          ),
+                        ])
                   : const SizedBox(),
               const SizedBox(
                 height: 20,

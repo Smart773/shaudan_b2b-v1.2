@@ -9,10 +9,10 @@ class Api {
   Api() {
     _dio.options.baseUrl = AppUrl.baseUrl;
     _dio.options.connectTimeout = const Duration(
-      seconds: 10,
+      seconds: 30,
     ); //10s
     _dio.options.receiveTimeout = const Duration(
-      seconds: 10,
+      seconds: 30,
     ); // 10s
     _dio.options.headers = {
       // accept every thing

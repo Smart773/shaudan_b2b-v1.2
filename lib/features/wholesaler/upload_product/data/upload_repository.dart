@@ -104,5 +104,65 @@ class UploadRepository {
     catch (e) {
       rethrow;
     } // catch
-  } // createAccount()
+  } 
+  Future<ProductModel> updateProduct({
+    required String productId,
+    required String productName,
+    required String productDescription,
+    required String productPrice,
+    required String productQuantity,
+    required List<String> productTags,
+    required List<Images> images,
+    required String productCategory,
+  }) async {
+    try {
+      //
+
+      // "title": "product 5",
+      // "category": "cold drinks",
+      // "price": 160,
+      // "quantity": 10,
+      // "WholeSaler":"5f9e1b7b9c9b7b1e0c3b3b1c",
+      // "description": "Coke 1.5 liter is a popular carbonated soft drink product offered by the Coca-Cola Company.",
+      // "images":[
+      //     {
+      //         "url": "http://res.cloudinary.com/dz79thnth/image/upload/v1690145905/images/tjdcphn2uontbmaj8vls.jpg",
+      //         "id": "images/tjdcphn2uontbmaj8vls"
+      //     },
+      //     {
+      //         "url": "http://res.cloudinary.com/dz79thnth/image/upload/v1690145905/images/nadbpgo7i7k6ps2ymxk0.jpg",
+      //         "id": "images/nadbpgo7i7k6ps2ymxk0"
+      //     },
+      //     {
+      //         "url": "http://res.cloudinary.com/dz79thnth/image/upload/v1690145906/images/ngx8qnoprrdlkyiuu4qg.png",
+      //         "id": "images/ngx8qnoprrdlkyiuu4qg"
+      //     }
+      // ],
+      // "tags": [
+      //     "tag1",
+      //     "tag2"
+      // ]
+
+      final response = await _api.patchApi({
+        "title": productName,
+        "category": productCategory,
+        "price": productPrice,
+        "quantity": productQuantity,
+        "description": productDescription,
+        "images": images.map((e) => e.toJson()).toList(),
+        "tags": productTags,
+      }, "products/$productId");
+
+      // Images imagesModel = Images.fromJson(response);
+      ProductModel productModel = ProductModel.fromJson(response);
+      // print(imagesModel.toJson());
+      return productModel;
+      // return imagesModel;
+      // return accountMode;
+      // return userModel;
+    } //try ()
+    catch (e) {
+      rethrow;
+    } // catch
+  } 
 } // UserRepository

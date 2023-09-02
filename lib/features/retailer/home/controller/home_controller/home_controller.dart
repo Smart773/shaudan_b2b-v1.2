@@ -13,7 +13,6 @@ class HomeController extends GetxController {
   RxInt? min = 45.obs;
   RxInt? sec = 45.obs;
 
-
   Future<List<ProductModel>> fetchAllProduct() async {
     final productRepository = ProductRepository();
     final List<ProductModel> products =
@@ -54,9 +53,8 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
     startTimer();
-    await fetchAllProduct();
   }
 }

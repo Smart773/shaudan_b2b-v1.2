@@ -7,6 +7,8 @@ class RoutesName {
   static const String retailerHome = '/retailer_home';
   static const String retailerProfile = '/retailer_profile';
   static const String retailerProductDetail = '/retailer/productDetail';
+  static const String retailerOrder = '/retailer/order';
+  static const String updateProduct = '/wholesaler/updateProduct';  
   static const String splash = '/splash';
   static const String detail = '/detail';
 }

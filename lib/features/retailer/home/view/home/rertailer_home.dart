@@ -6,6 +6,7 @@ import 'package:shaudan_b2b/features/retailer/home/data/models/product_model.dar
 import 'package:shaudan_b2b/features/retailer/home/view/home/home_loading.dart';
 import 'package:shaudan_b2b/features/retailer/home/view/home/widgets/home_widgets.dart';
 import 'package:shaudan_b2b/features/retailer/liked/controller/liked_controller.dart';
+import 'package:shaudan_b2b/features/retailer/search/view/search.dart';
 import 'package:shaudan_b2b/res/Images/image_strings.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -30,107 +31,112 @@ class RetailerHome extends StatelessWidget {
     final hour = "";
 
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Expanded(
-                flex: size.width > 800 ? 1 : 0,
-                child: const SizedBox(),
-              ),
-              const Expanded(child: MockSearchProduct()),
-            ],
-          ),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Expanded(
+              flex: size.width > 800 ? 1 : 0,
+              child: const SizedBox(),
+            ),
+            Expanded(
+                child: InkWell(
+                    onTap: () {
+                      Get.to(() => const Search());
+                    },
+                    child: const MockSearchProduct())),
+          ],
         ),
-        body: FutureBuilder(
-            future: homeController.fetchAllProduct(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData) {
-                final List<ProductModel>? productList = snapshot.data;
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      BannerWidgets(size: size, imageList: imageList),
-                      const SizedBox(
-                        height: 10,
-                      ), //
-                      Row(
-                        children: [
-                          Image.asset(
-                            AppImagesStrings.flash,
-                            height: size.width > 1016 ? 150 : 100,
-                            width: size.width > 1016 ? 200 : 150,
-                          ),
-                        ],
-                      ),
-                      //CountDownTimer(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      //CountDownTime
-                      Obx(() => Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const TimerText(),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Timer(
-                                  hour: "${homeController.hr!.value}",
-                                  mint: "${homeController.min!.value}",
-                                  sec: "${homeController.sec!.value}",
-                                ),
-                              ],
-                            ),
-                          )),
-                      const HeadingOnProductList(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: StaggeredGridView.countBuilder(
-                          primary: false,
-                          shrinkWrap: true,
-                          key: ObjectKey(size.width > 1016 ? 2 : 4),
-                          // **add this line**
-                          crossAxisCount: size.width > 1016 ? 8 : 4,
-                          itemCount: productList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final ProductModel product = productList[index];
-                            return InkWell(
-                                onTap: () {
-                                  homeController.onProductTab(product);
-                                },
-                                child:
-                                    ProductItem(size: size, product: product));
-                          },
-
-                          staggeredTileBuilder: (int index) =>
-                              const StaggeredTile.fit(2),
-                          mainAxisSpacing: 15.0,
-                          crossAxisSpacing: 15.0,
+      ),
+      body: FutureBuilder(
+          future: homeController.fetchAllProduct(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData) {
+              final List<ProductModel>? productList = snapshot.data;
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    BannerWidgets(size: size, imageList: imageList),
+                    const SizedBox(
+                      height: 10,
+                    ), //
+                    Row(
+                      children: [
+                        Image.asset(
+                          AppImagesStrings.flash,
+                          height: size.width > 1016 ? 150 : 100,
+                          width: size.width > 1016 ? 200 : 150,
                         ),
+                      ],
+                    ),
+                    //CountDownTimer(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    //CountDownTime
+                    Obx(() => Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const TimerText(),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Timer(
+                                hour: "${homeController.hr!.value}",
+                                mint: "${homeController.min!.value}",
+                                sec: "${homeController.sec!.value}",
+                              ),
+                            ],
+                          ),
+                        )),
+                    const HeadingOnProductList(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StaggeredGridView.countBuilder(
+                        primary: false,
+                        shrinkWrap: true,
+                        key: ObjectKey(size.width > 1016 ? 2 : 4),
+                        // **add this line**
+                        crossAxisCount: size.width > 1016 ? 8 : 4,
+                        itemCount: productList!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final ProductModel product = productList[index];
+                          return InkWell(
+                              onTap: () {
+                                homeController.onProductTab(product);
+                              },
+                              child: ProductItem(size: size, product: product));
+                        },
+
+                        staggeredTileBuilder: (int index) =>
+                            const StaggeredTile.fit(2),
+                        mainAxisSpacing: 15.0,
+                        crossAxisSpacing: 15.0,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(" katam tata tata byee byee gayaaa",
-                            style: TextStyle(
-                                color: AppColors.greyColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                return const Center(
-                  child: HomeLoading(),
-                );
-              }
-            }));
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text(" katam tata tata byee byee gayaaa",
+                          style: TextStyle(
+                              color: AppColors.greyColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: HomeLoading(),
+              );
+            }
+          }),
+    );
   }
 }
 
