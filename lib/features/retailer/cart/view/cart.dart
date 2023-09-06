@@ -25,7 +25,7 @@ class Cart extends StatelessWidget {
               onPressed: () {
                 cartController.onDeletePressed();
               },
-              icon: Icon(
+              icon: const Icon(
                 LineIcons.trash,
                 color: AppColors.primaryColor,
               )),
@@ -37,18 +37,8 @@ class Cart extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Row(
-                children: [
-                  const Text("All"),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.check_circle,
-                          color: AppColors.primaryColor,
-                          size: size.width > 400 ? 25 : 18)),
-                ],
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -84,15 +74,19 @@ class Cart extends StatelessWidget {
           ),
         ),
       ),
-      body: StreamBuilder(
-          stream: cartController.cartListStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<List<CartModel>> snapshot) {
+      body: FutureBuilder<List<CartModel>>(
+          future: cartController.getCartList(),
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: snapshot.data?.length,
+              return Obx(() => 
+              cartController.cartList.value.isEmpty?
+              const Center(
+                child: Text("No Products in Cart"),
+              ):
+              ListView.builder(
+                  itemCount: cartController.cartList.value.length,
                   itemBuilder: (context, index) {
-                    final cartItem = snapshot.data![index];
+                    final cartItem = cartController.cartList.value[index];
                     return CartItem(
                       size: size,
                       image: cartItem.product!.images![0].url!,
@@ -111,7 +105,7 @@ class Cart extends StatelessWidget {
                             !cartItem.isProductSelectedBool!, cartItem.sId!);
                       },
                     );
-                  });
+                  }));
             } else {
               return const Center(child: CircularProgressIndicator());
             }
@@ -119,6 +113,39 @@ class Cart extends StatelessWidget {
     );
   }
 }
+
+// F(
+//           stream: cartController.cartListStream,
+//           builder:
+//               (BuildContext context, AsyncSnapshot<List<CartModel>> snapshot) {
+//             if (snapshot.hasData) {
+//               return ListView.builder(
+//                   itemCount: snapshot.data?.length,
+//                   itemBuilder: (context, index) {
+//                     final cartItem = snapshot.data![index];
+//                     return CartItem(
+//                       size: size,
+//                       image: cartItem.product!.images![0].url!,
+//                       title: cartItem.product!.title!,
+//                       price: cartItem.product!.price!.toString(),
+//                       description: cartItem.product!.description!,
+//                       qty: cartItem.quantity!,
+//                       qtymax: cartItem.product!.quantity!,
+//                       qtymin: 1,
+//                       isSelected: cartItem.isProductSelectedBool!,
+//                       onQtyChanged: (value) {
+//                         cartController.onPressQty(value as int, cartItem.sId!);
+//                       },
+//                       onpressSelected: () {
+//                         cartController.onPressSelected(
+//                             !cartItem.isProductSelectedBool!, cartItem.sId!);
+//                       },
+//                     );
+//                   });
+//             } else {
+//               return const Center(child: CircularProgressIndicator());
+//             }
+//           }),
 
 class CartItem extends StatelessWidget {
   const CartItem({

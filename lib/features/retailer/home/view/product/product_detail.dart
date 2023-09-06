@@ -37,13 +37,6 @@ class ProductDetail extends StatelessWidget {
                     },
                     width: size.width * 0.45,
                   ),
-                  AppButtonElevated(
-                    title: "Buy Now",
-                    onPress: () {
-                      productController.addToCart();
-                    },
-                    width: size.width * 0.45,
-                  ),
                 ],
               ),
             ),
@@ -286,13 +279,6 @@ class ProductData extends StatelessWidget {
                           ),
                           const SizedBox(
                             width: 20,
-                          ),
-                          AppButtonElevated(
-                            title: "Buy Now",
-                            onPress: () {
-                              buyNow();
-                            },
-                            width: size.width * 0.17,
                           ),
                         ],
                       ),

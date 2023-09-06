@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shaudan_b2b/cores/services/pdf_service.dart';
 import 'package:shaudan_b2b/features/retailer/order/data/models/order_model.dart';
 import 'package:shaudan_b2b/features/wholesaler/order/controller/wholesaler_order_controller.dart';
 import 'package:shaudan_b2b/features/wholesaler/order/view/widgets.dart';
@@ -18,6 +19,22 @@ class WholeSalerOrder extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order Details'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await PdfInvoiceService.createInvoice().then((value) async {
+                // await PdfInvoiceService.savePdfFile("mang000", value)
+                //     .then((value) {
+                //   print("magooooooooooooo");
+                // });
+                // comver  Uint8List to pdf file then open it
+                PdfInvoiceService.saveUint8ListToFile(value, "magooo.pdf");
+                print("fdfsdf");
+              });
+            },
+            icon: const Icon(Icons.print),
+          ),
+        ],
         backgroundColor: AppColors.primaryColor,
       ),
       backgroundColor: AppColors.grayColor10,

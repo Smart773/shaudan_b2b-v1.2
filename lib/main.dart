@@ -11,7 +11,7 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   Get.put(LoginController(), permanent: true);
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const MyApp());  
 }
 
 class MyApp extends StatelessWidget {

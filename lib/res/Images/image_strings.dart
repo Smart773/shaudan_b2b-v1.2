@@ -1,6 +1,7 @@
 class AppImagesStrings {
   // Splash Screen Images
   static const logoShaudan = 'assets/images/LogoShaudan.png';
+  static const logoShaudanGreen = 'assets/images/shuadanLogoGreen.png';
   static const logoFirstHalf = 'assets/images/LogoFirstHalf.png';
   static const logoSecondHalf = 'assets/images/LogoSecondHalf.png';
   static const logobtb = 'assets/images/Logobtb.png';
@@ -32,5 +33,4 @@ class AppImagesStrings {
   static const banner3 = 'assets/images/banner3.jpg';
   static const banner4 = 'assets/images/banner4.jpg';
   static const flash = 'assets/images/flash.png';
-
 }

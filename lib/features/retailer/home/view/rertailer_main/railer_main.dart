@@ -41,15 +41,6 @@ class RetailerMainScreen extends StatelessWidget {
                   BottomNavigationBar(
                     currentIndex: retailerMainController.selectedIndex.value,
                     onTap: (int index) {
-                      if (index == 2 &&
-                          retailerMainController.isCartSelected.value) {
-                        Get.find<CartController>().startTimer();
-                      } else if (retailerMainController.selectedIndex.value ==
-                          2) {
-                        Get.find<CartController>().stopTimer();
-                        retailerMainController.isCartSelected.value = true;
-                      }
-
                       retailerMainController.selectedIndex.value = index;
                     },
                     items: [
@@ -66,7 +57,7 @@ class RetailerMainScreen extends StatelessWidget {
                         label: AppStrings.cart.tr,
                       ),
                       BottomNavigationBarItem(
-                        icon:  const Icon(LineIcons.shoppingBag),
+                        icon: const Icon(LineIcons.shoppingBag),
                         label: AppStrings.order.tr,
                       ),
                       BottomNavigationBarItem(
@@ -117,14 +108,6 @@ class RetailerMainScreen extends StatelessWidget {
                       ],
                       selectedIndex: retailerMainController.selectedIndex.value,
                       onDestinationSelected: (int index) {
-                        if (index == 2 &&
-                            retailerMainController.isCartSelected.value) {
-                          Get.find<CartController>().startTimer();
-                        } else if (retailerMainController.selectedIndex.value ==
-                            2) {
-                          Get.find<CartController>().stopTimer();
-                          retailerMainController.isCartSelected.value = true;
-                        }
                         retailerMainController.selectedIndex.value = index;
                       },
                     ),

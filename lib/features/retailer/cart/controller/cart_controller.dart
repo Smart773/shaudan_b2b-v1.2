@@ -9,23 +9,21 @@ import '../data/repositories/cart_repositories.dart';
 
 class CartController extends GetxController {
   static CartController instance = Get.find();
-  late StreamController<List<CartModel>> _controller;
-  Stream<List<CartModel>> get cartListStream => _controller.stream;
   late Timer _timer;
   RxInt amount = 0.obs;
   RxBool isAllSelected = false.obs;
   RxBool isAnySelected = false.obs;
   int timerCount = 10;
   bool istimerActive = false;
-  List<CartModel> cartList = [];
+  Rx<List<CartModel>> cartList = Rx<List<CartModel>>([]);
   List<CartModel> selectedProducts = [];
 
   void checkSelections() {
-    if (cartList.isNotEmpty) {
-      isAnySelected.value =
-          cartList.any((element) => element.isProductSelectedBool == true);
-      isAllSelected.value =
-          cartList.every((element) => element.isProductSelectedBool == true);
+    if (cartList.value.isNotEmpty) {
+      isAnySelected.value = cartList.value
+          .any((element) => element.isProductSelectedBool == true);
+      isAllSelected.value = cartList.value
+          .every((element) => element.isProductSelectedBool == true);
     } else {
       isAnySelected.value = false;
       isAllSelected.value = false;
@@ -34,11 +32,11 @@ class CartController extends GetxController {
 
   void getTheListOfSelectedProducts() {
     selectedProducts.clear();
-    cartList.forEach((element) {
+    for (var element in cartList.value) {
       if (element.isProductSelectedBool == true) {
         selectedProducts.add(element);
       }
-    });
+    }
 
     print(selectedProducts);
   }
@@ -64,26 +62,6 @@ class CartController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _controller = StreamController<List<CartModel>>.broadcast();
-    _timer = Timer.periodic(Duration(seconds: timerCount), (timer) {
-      getCartList();
-    });
-    istimerActive = true;
-  }
-
-  // function to sttop timer
-  void stopTimer() {
-    if (istimerActive) _timer.cancel();
-    istimerActive = false;
-  }
-
-  // function to start timer
-  void startTimer() {
-    if (!istimerActive)
-      _timer = Timer.periodic(Duration(seconds: timerCount), (timer) {
-        getCartList();
-      });
-    istimerActive = true;
   }
 
   @override
@@ -97,29 +75,18 @@ class CartController extends GetxController {
     });
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    _controller.close();
-    _timer.cancel();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.close();
-    _timer.cancel();
-  }
-
   void onDeletePressed() async {
     if (isAnySelected.value) {
       Utils.showLoaing();
       await CartRepository().deleteSeletecd().then((value) async {
-        // wait for 1 second
-        await Future.delayed(const Duration(seconds: 1));
-        await getAmount().then((value) {
+        await getAmount().then((value) async {
           amount.value = value;
-          Utils.hideLoading();
+          await getCartList().then((value) {
+            Utils.hideLoading();
+          }).onError((error, stackTrace) {
+            Utils.hideLoading();
+            Get.snackbar("Error", error.toString());
+          });
         }).onError((error, stackTrace) {
           Utils.hideLoading();
           Get.snackbar("Error", error.toString());
@@ -153,10 +120,11 @@ class CartController extends GetxController {
     Utils.showLoaing();
     await updateSelected(selected, id).then((value) async {
       // wait for 1 second
-      await Future.delayed(const Duration(seconds: 1));
       await getAmount().then((value) {
         amount.value = value;
         Utils.hideLoading();
+      }).then((value) async {
+        await getCartList();
       }).onError((error, stackTrace) {
         Utils.hideLoading();
         Get.snackbar("Error", error.toString());
@@ -171,8 +139,7 @@ class CartController extends GetxController {
   Future<List<CartModel>> getCartList() async {
     try {
       final cartList = await CartRepository().getCart();
-      _controller.sink.add(cartList);
-      this.cartList = cartList;
+      this.cartList.value = cartList;
       checkSelections();
       return cartList;
     } catch (e) {
