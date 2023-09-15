@@ -23,7 +23,7 @@ class Address {
   //.toString
   @override
   String toString() {
-    return ' {street: $street, houseNumber: $houseNumber, city: $city, postalCode: $postalCode, state: $state, country: $country, }';
+    return ' street: $street, houseNumber: $houseNumber, city: $city, postalCode: $postalCode, state: $state, country: $country, ';
   }
 
   Address.fromJson(Map<String, dynamic> json) {

@@ -14,6 +14,6 @@ class AccountController extends GetxController
   }
 
   initController() {
-    tabController = TabController(length: 3, vsync: this).obs;
+    tabController = TabController(length: 2, vsync: this).obs;
   }
 }

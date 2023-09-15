@@ -19,7 +19,10 @@ class CheckOut extends StatelessWidget {
         title: const Text('CheckOut'),
         backgroundColor: AppColors.primaryColor,
       ),
-      bottomSheet: size.width > 600 ? const SizedBox() : PlaceOrderButton(size: size, checkOutController: checkOutController),
+      bottomSheet: size.width > 600
+          ? const SizedBox()
+          : PlaceOrderButton(
+              size: size, checkOutController: checkOutController),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > 600) {
@@ -66,7 +69,9 @@ class CheckOut extends StatelessWidget {
                             size: size, checkOutController: checkOutController),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: PlaceOrderButton(size: size, checkOutController: checkOutController),
+                          child: PlaceOrderButton(
+                              size: size,
+                              checkOutController: checkOutController),
                         ),
                       ],
                     ),
@@ -154,9 +159,9 @@ class OrderSummeryBlock extends StatelessWidget {
     return OrderSummery(
       size: size,
       totalItemPrice: checkOutController.totalItemAmount.toString(),
-      deliveryCharges: checkOutController.deleveryCharges.toString(),
+      deliveryCharges: "250",
       discount: checkOutController.discount.toString(),
-      totalPayable: checkOutController.totalAmount.toString(),
+      totalPayable: (checkOutController.totalAmount + 250).toString(),
     );
   }
 }
@@ -565,7 +570,7 @@ class ProductItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Standard Delivery (Free)",
+                        "Standard Delivery",
                         style: TextStyle(
                           fontSize: size.width > 400 ? 14 : 12,
                           fontWeight: FontWeight.w600,
@@ -573,7 +578,7 @@ class ProductItemCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "| Rs. 0",
+                        "| Rs. 250",
                         style: TextStyle(
                           fontSize: size.width > 400 ? 14 : 12,
                           fontWeight: FontWeight.w600,

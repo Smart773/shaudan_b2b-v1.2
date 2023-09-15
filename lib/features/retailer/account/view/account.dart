@@ -5,7 +5,7 @@ import 'package:shaudan_b2b/features/auth/data/models/user_model.dart';
 import 'package:shaudan_b2b/features/retailer/account/view/widgets/account.widgets.dart';
 import 'package:shaudan_b2b/features/retailer/home/view/home/widgets/product_widgets.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
-import 'package:shaudan_b2b/res/localizations/app_Strings.dart';
+import 'package:shaudan_b2b/res/localizations/app_strings.dart';
 import 'package:shaudan_b2b/res/routes/routes_name.dart';
 
 import '../controller/account_controller.dart';
@@ -37,54 +37,51 @@ class Account extends StatelessWidget {
         title: Text(AppStrings.account.tr),
       ),
       body: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      color: AppColors.grey2Color,
-                      height: size.width >= 650
-                          ? size.height * 0.25
-                          : size.height * 0.2,
-                      width: double.infinity,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: AccountHeaderWidget(
-                          size: size,
-                          storeName: "",
-                          // storeName: user.storeName!,
-                          title: user.role!,
-                          phoneNo: user.name!,
-                        ),
-                      ),
-                    ),
-                    //mutil tab View()
-                    Obx(() => TabBar(
-                            unselectedLabelColor: AppColors.grey3Color,
-                            labelColor: AppColors.primaryColor,
-                            controller: accountController.tabController.value,
-                            indicatorWeight: 3.0,
-                            tabs: [
-                              Tab(icon: Text(AppStrings.contact.tr)),
-                              Tab(icon: Text(AppStrings.orderHistory.tr)),
-                              Tab(icon: Text(AppStrings.reviews.tr)),
-                            ])),
-                    Obx(() => SizedBox(
-                          height: size.height * 0.6,
-                          child: TabBarView(
-                            controller: accountController.tabController.value,
-                            children: const [
-                              DataPage(),
-                              //Order Histor
-                              History(),
-                              Reviews()
-                            ],
-                          ),
-                        )),
-                  ],
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                color: AppColors.grey2Color,
+                height:
+                    size.width >= 650 ? size.height * 0.25 : size.height * 0.2,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: AccountHeaderWidget(
+                    size: size,
+                    storeName: user.name!,
+                    // storeName: user.storeName!,
+                    title: user.role!,
+                    phoneNo: user.name!,
+                  ),
                 ),
               ),
-            ),
+              //mutil tab View()
+              Obx(() => TabBar(
+                      unselectedLabelColor: AppColors.grey3Color,
+                      labelColor: AppColors.primaryColor,
+                      controller: accountController.tabController.value,
+                      indicatorWeight: 3.0,
+                      tabs: [
+                        Tab(icon: Text(AppStrings.contact.tr)),
+                        Tab(icon: Text(AppStrings.reviews.tr)),
+                      ])),
+              Obx(() => SizedBox(
+                    height: size.height * 0.6,
+                    child: TabBarView(
+                      controller: accountController.tabController.value,
+                      children: const [
+                        DataPage(),
+                        //Order Histor
+                        Reviews()
+                      ],
+                    ),
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -189,14 +186,20 @@ class DataPage extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.email),
           title: Text(AppStrings.email.tr),
-          subtitle: Text(""),
+          subtitle: Text(LoginController.to.user.value.account!.email!),
           // subtitle: Text(LoginController.to.user.value.email!),
         ),
         ListTile(
           leading: const Icon(Icons.phone),
           title: Text(AppStrings.phone.tr),
-          // subtitle: Text(LoginController.to.user.value.phone!),
-          subtitle: Text(""),
+          // subtitle: Text(LoginController.to.user.value.phon0e!),
+          subtitle: Text(LoginController.to.user.value.contact!.phoneNumber!),
+        ),
+        ListTile(
+          leading: const Icon(Icons.home),
+          title: Text(AppStrings.address.tr),
+          // subtitle: Text(LoginController.to.user.value.phon0e!),
+          subtitle: Text(LoginController.to.user.value.address!.toString()),
         ),
       ],
     );

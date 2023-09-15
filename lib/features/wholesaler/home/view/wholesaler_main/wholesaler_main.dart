@@ -8,7 +8,7 @@ import 'package:shaudan_b2b/features/wholesaler/order/view/wholesaler_order.dart
 import 'package:shaudan_b2b/features/wholesaler/store/view/store.dart';
 import 'package:shaudan_b2b/features/wholesaler/upload_product/view/upload_product.dart';
 import 'package:shaudan_b2b/res/colors/AppColors.dart';
-import 'package:shaudan_b2b/res/localizations/app_Strings.dart';
+import 'package:shaudan_b2b/res/localizations/app_strings.dart';
 import 'package:shaudan_b2b/utils/utils.dart';
 
 class WholeSalerMainScreen extends StatelessWidget {
@@ -46,8 +46,8 @@ class WholeSalerMainScreen extends StatelessWidget {
                         label: AppStrings.home.tr,
                       ),
                       BottomNavigationBarItem(
-                        icon: const Icon(Icons.notifications),
-                        label: AppStrings.notify.tr,
+                        icon: const Icon(Icons.store),
+                        label: AppStrings.store.tr,
                       ),
                       BottomNavigationBarItem(
                         icon: const Icon(LineIcons.upload),
@@ -87,8 +87,8 @@ class WholeSalerMainScreen extends StatelessWidget {
                           label: Text(AppStrings.home.tr),
                         ),
                         NavigationRailDestination(
-                          icon: const Icon(Icons.notifications),
-                          label: Text(AppStrings.notify.tr),
+                          icon: const Icon(Icons.store),
+                          label: Text(AppStrings.store.tr),
                         ),
                         NavigationRailDestination(
                           icon: const Icon(LineIcons.upload),

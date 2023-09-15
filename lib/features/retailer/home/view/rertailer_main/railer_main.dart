@@ -23,7 +23,6 @@ class RetailerMainScreen extends StatelessWidget {
 
     final List<Widget> pages = <Widget>[
       const RetailerHome(),
-      const Notify(),
       const Cart(),
       const RetailerOrder(),
       const Account(),
@@ -47,10 +46,6 @@ class RetailerMainScreen extends StatelessWidget {
                       BottomNavigationBarItem(
                         icon: const Icon(Icons.home),
                         label: AppStrings.home.tr,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: const Icon(Icons.notifications),
-                        label: AppStrings.notify.tr,
                       ),
                       BottomNavigationBarItem(
                         icon: const Icon(Icons.shopping_cart),
@@ -88,10 +83,6 @@ class RetailerMainScreen extends StatelessWidget {
                         NavigationRailDestination(
                           icon: const Icon(Icons.home),
                           label: Text(AppStrings.home.tr),
-                        ),
-                        NavigationRailDestination(
-                          icon: const Icon(Icons.notifications),
-                          label: Text(AppStrings.notify.tr),
                         ),
                         NavigationRailDestination(
                           icon: const Icon(Icons.shopping_cart),

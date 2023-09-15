@@ -3,6 +3,8 @@ class AppStrings {
   static const String retailer = 'retailer';
   static const String wholesaler = 'wholesaler';
   static const String home = 'home';
+  static const String store = 'store';
+  static const String address = 'address';
   static const String notify = 'notify';
   static const String cart = 'cart';
   static const String liked = 'liked';
@@ -40,37 +42,35 @@ class AppStrings {
 
   static const String phone = 'phone';
   static const String phoneHint = 'phone_hint';
-  static const String order= 'order';
-  static const String dashboard= 'dashboard';
-  static const String orderDetails= 'order_details';
-  static const String orderStatus= 'order_status';
-  static const String orderDate= 'order_date';
-  static const String orderAmount= 'order_amount';
-  static const String orderItems= 'order_items';
-  static const String orderItem= 'order_item';
-  static const String orderItemName= 'order_item_name';
-  static const String orderItemQuantity= 'order_item_quantity';
-  static const String orderItemPrice= 'order_item_price';
-  static const String orderItemTotal= 'order_item_total';
-  static const String addItems= 'add_items';
+  static const String order = 'order';
+  static const String dashboard = 'dashboard';
+  static const String orderDetails = 'order_details';
+  static const String orderStatus = 'order_status';
+  static const String orderDate = 'order_date';
+  static const String orderAmount = 'order_amount';
+  static const String orderItems = 'order_items';
+  static const String orderItem = 'order_item';
+  static const String orderItemName = 'order_item_name';
+  static const String orderItemQuantity = 'order_item_quantity';
+  static const String orderItemPrice = 'order_item_price';
+  static const String orderItemTotal = 'order_item_total';
+  static const String addItems = 'add_items';
 
-  static const String upload= 'upload';
-  static const String uploadProduct= 'upload_product';
-  static const String productDetails= 'product_details';
-  static const String productName= 'product_name';
-  static const String productNameHint= 'product_name_hint';
-  static const String productDescription= 'product_description';
-  static const String productDescriptionHint= 'product_description_hint';
-  static const String productPrice= 'product_price';
-  static const String productPriceHint= 'product_price_hint';
-  static const String productQuantity= 'product_quantity';
-  static const String productQuantityHint= 'product_quantity_hint';
-  static const String productCategory= 'product_category';
-  static const String productCategoryHint= 'product_category_hint';
-  static const String productSubCategory= 'product_sub_category';
-  static const String productSubCategoryHint= 'product_sub_category_hint';
-  static const String productBrand= 'product_brand';
-  static const String productBrandHint= 'product_brand_hint';
-  
-  
-  }
+  static const String upload = 'upload';
+  static const String uploadProduct = 'upload_product';
+  static const String productDetails = 'product_details';
+  static const String productName = 'product_name';
+  static const String productNameHint = 'product_name_hint';
+  static const String productDescription = 'product_description';
+  static const String productDescriptionHint = 'product_description_hint';
+  static const String productPrice = 'product_price';
+  static const String productPriceHint = 'product_price_hint';
+  static const String productQuantity = 'product_quantity';
+  static const String productQuantityHint = 'product_quantity_hint';
+  static const String productCategory = 'product_category';
+  static const String productCategoryHint = 'product_category_hint';
+  static const String productSubCategory = 'product_sub_category';
+  static const String productSubCategoryHint = 'product_sub_category_hint';
+  static const String productBrand = 'product_brand';
+  static const String productBrandHint = 'product_brand_hint';
+}

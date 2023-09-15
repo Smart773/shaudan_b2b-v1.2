@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shaudan_b2b/cores/services/pdf_service.dart';
@@ -20,20 +23,17 @@ class WholeSalerOrder extends StatelessWidget {
         title: const Text('Order Details'),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () async {
-              await PdfInvoiceService.createInvoice().then((value) async {
-                // await PdfInvoiceService.savePdfFile("mang000", value)
-                //     .then((value) {
-                //   print("magooooooooooooo");
-                // });
-                // comver  Uint8List to pdf file then open it
-                PdfInvoiceService.saveUint8ListToFile(value, "magooo.pdf");
-                print("fdfsdf");
-              });
-            },
-            icon: const Icon(Icons.print),
-          ),
+          Obx(() => controller.selectedIndex.value != 1
+              ? const SizedBox()
+              : Visibility(
+                  visible: kIsWeb,
+                  child: IconButton(
+                    onPressed: () {
+                      controller.onPrintPress();
+                    },
+                    icon: const Icon(Icons.print),
+                  ),
+                )),
         ],
         backgroundColor: AppColors.primaryColor,
       ),

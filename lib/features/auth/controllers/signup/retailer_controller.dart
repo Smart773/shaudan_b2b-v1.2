@@ -80,7 +80,7 @@ class RetailerController extends GetxController {
       return "Please enter valid $label";
     } else if ((label == AppStrings.name.tr ||
             label == AppStrings.storeName.tr) &&
-        !GetUtils.isAlphabetOnly(value)) {
+        !GetUtils.isAlphabetWithSpace(value)) {
       return "$label should be only alphabets";
     } else if (label == AppStrings.password.tr && value.length < 6) {
       return "$label should be atleast 6 characters";

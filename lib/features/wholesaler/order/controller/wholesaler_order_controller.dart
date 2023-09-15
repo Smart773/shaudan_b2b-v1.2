@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shaudan_b2b/cores/services/pdf_service.dart';
 import 'package:shaudan_b2b/features/retailer/order/data/models/order_model.dart';
 import 'package:shaudan_b2b/features/retailer/order/data/repositories/order_repositories.dart';
 import 'package:shaudan_b2b/utils/utils.dart';
@@ -25,6 +26,56 @@ class WholeSalerOrderController extends GetxController
 
   initController() {
     tabController = TabController(length: 4, vsync: this).obs;
+  }
+
+  void onPrintPress() async {
+    Utils.showLoaing();
+    if (pendingOrderModelList.value.isEmpty) {
+      Utils.hideLoading();
+      Get.snackbar(
+        "No Pending Orders",
+        "No Pending Orders Found",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    await PdfInvoiceService.createInvoice(
+            listorder: pendingOrderModelList.value)
+        .then((value) async {
+      await PdfInvoiceService.saveUint8ListToFile(value,
+              "Pendings Orders${DateTime.now().millisecondsSinceEpoch}.pdf")
+          .then((value) {
+        Utils.hideLoading();
+        Get.snackbar(
+          "Success",
+          "Pdf Downloaded Successfully",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      }).onError((error, stackTrace) {
+        Utils.hideLoading();
+        Get.snackbar(
+          "Error",
+          error.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      });
+    }).onError((error, stackTrace) {
+      Utils.hideLoading();
+      Get.snackbar(
+        "Error",
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    });
   }
 
   // onTabChange

@@ -250,7 +250,7 @@ class TabViewItem extends StatelessWidget {
               image: order.orderItem![0].product!.images![0].url!,
               qty: (order.orderItem![0].quantity!).toString(),
               title: order.orderItem![0].product!.title!,
-              amount: (order.totalAmmount!).toString(),
+              amount: (order.orderItem![0].product!.price).toString(),
               status: order.orderStatus!,
               onPressed: () {
                 controller.onCanceled(order.id!);

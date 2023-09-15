@@ -29,6 +29,9 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int qunty = int.parse(qty);
+    int amnt = int.parse(amount);
+    int total = qunty * amnt;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Card(
@@ -135,7 +138,7 @@ class OrderCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  Text('Rs. $amount',
+                  Text('Rs. ${total.toString()}',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppColors.primaryColor)),
